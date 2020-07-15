@@ -27,10 +27,10 @@ public class Category {
 	@Column(length=50)
 	public String CategoryName;
 	
-	//@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	//@JoinColumn(name="CategoryId")
-	@ManyToOne(optional = false)
-    @JoinColumn(name="book_id")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="CategoryId")
+	//@ManyToOne(optional = false)
+    //@JoinColumn(name="book_id")
 	private List<Book> books = new ArrayList<Book>();
 
 	public long getCategoryId() {
