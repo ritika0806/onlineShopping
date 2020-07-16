@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.entity.Book;
+
 import com.cg.entity.Category;
 import com.cg.service.CategoryService;
 @RestController
@@ -25,10 +25,5 @@ public class CategoryController {
 		}
 
 	
-	@PostMapping("/createbook")
-	public ResponseEntity<Book> addBook(@RequestBody Book book ) {
-			Book b=service.addBook(book);
-			ResponseEntity<Book> responseEntity = new ResponseEntity<Book>(b,HttpStatus.OK);
-			return responseEntity;
-		}
+
 }

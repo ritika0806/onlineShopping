@@ -2,18 +2,14 @@ package com.cg.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
@@ -27,10 +23,8 @@ public class Category {
 	@Column(length=50)
 	public String CategoryName;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name="CategoryId")
-	//@ManyToOne(optional = false)
-    //@JoinColumn(name="book_id")
+	@JsonBackReference
+	@OneToMany(mappedBy="category")
 	private List<Book> books = new ArrayList<Book>();
 
 	public long getCategoryId() {
@@ -51,5 +45,13 @@ public class Category {
 	public void setCategoryName(String categoryName) {
 		CategoryName = categoryName;
 	}
+	public Category() {}
+	public Category(int categoryId, String categoryName, List<Book> books) {
+		
+		CategoryId = categoryId;
+		CategoryName = categoryName;
+		this.books = books;
+	}
+	
 	
 }

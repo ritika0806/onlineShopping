@@ -3,6 +3,7 @@ package com.cg.entity;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,18 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table(name="book")
 public class Book {
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	//@ManyToOne
-	//@JsonIgnore
-	//@JoinColumn(name="CategoryId")
-	//public Category Category;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(targetEntity=Category.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="CategoryName")
+	public Category category;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(length=10)
@@ -45,12 +44,12 @@ public class Book {
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] icon;
 	
-	/*public Category getCategory() {
-		return Category;
+	public Category getCategory() {
+		return category;
 	}
 	public void setCategory(Category category) {
-		Category = category;
-	}*/
+		this.category = category;
+	}
 	public int getBook_id() {
 		return book_id;
 	}
